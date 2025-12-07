@@ -32,5 +32,3 @@ public function rules()
         'message' => 'required|string|max:500',
     ];
 }
-
-?>
