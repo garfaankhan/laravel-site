@@ -23,3 +23,14 @@ class ContactController extends Controller
         return back()->with('status', 'Thank you! Your message has been sent.');
     }
 }
+
+public function rules()
+{
+    return [
+        'name'    => 'required|string|max:100',
+        'email'   => 'required|email',
+        'message' => 'required|string|max:500',
+    ];
+}
+
+?>
