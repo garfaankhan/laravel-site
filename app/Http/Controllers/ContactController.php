@@ -2,33 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
-use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    public function store(Request $request)
+    public function store(ContactRequest $request)
     {
-        $validated = $request->validate([
-            'name'    => ['required', 'string', 'max:255'],
-            'email'   => ['required', 'email', 'max:255'],
-            'subject' => ['nullable', 'string', 'max:255'],
-            'message' => ['required', 'string', 'max:2000'],
-        ]);
+        // Validated data from Form Request
+        $data = $request->validated();
 
-        Contact::create($validated);
+        // Save message to database
+        Contact::create($data);
 
-        // Here you could also trigger emails or notifications.
-
-        return back()->with('status', 'Thank you! Your message has been sent.');
+        return back()->with('success', 'Thank you! Your message has been sent.');
     }
-}
-
-public function rules()
-{
-    return [
-        'name'    => 'required|string|max:100',
-        'email'   => 'required|email',
-        'message' => 'required|string|max:500',
-    ];
 }
