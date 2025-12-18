@@ -13,4 +13,4 @@ Route::get('/blog', [PageController::class, 'blog'])->name('blog');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 
 // Contact form submission
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:10,1');
